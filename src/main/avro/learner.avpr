@@ -1,0 +1,10 @@
+{"namespace": "org.librairy.service.learner.facade.model",
+ "protocol": "LearnerService",
+
+ "messages": {
+     "train": {
+       "request": [{"name": "corpus", "type": "string"},{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}},{"name": "mapping", "type": {"type" : "map","values":"string"}, "default":{}} ],
+       "response": "string"
+     }
+ }
+}
