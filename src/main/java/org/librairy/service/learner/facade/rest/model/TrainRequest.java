@@ -10,32 +10,33 @@ import java.util.Map;
 
 public class TrainRequest {
 
-    @ApiModelProperty(notes="Unstructured text")
-    private String text;
+    @ApiModelProperty(notes="algorithm settings")
+    private Hyperparameters parameters;
 
-    @ApiModelProperty(notes="Model Hyperparameters")
-    private Map<String,String> parameters;
+    @ApiModelProperty(notes="set of texts")
+    private Corpus corpus;
 
-    @ApiModelProperty(notes="Corpus Information per Column")
-    private Map<String,String> mapping;
+    @ApiModelProperty(notes="extra config values")
+    private Map<String,String> extra;
 
-    public TrainRequest(String text, Map<String,String> parameters, Map<String,String> mapping) {
-        this.text       = text;
-        this.parameters = parameters;
-        this.mapping    = mapping;
+    public TrainRequest(Corpus corpus, Hyperparameters parameters, Map<String,String> extra) {
+        this.corpus         = corpus;
+        this.parameters     = parameters;
+        this.extra          = extra;
     }
 
     public TrainRequest(){};
 
-    public String getText() {
-        return text;
-    }
 
-    public Map<String, String> getParameters() {
+    public Hyperparameters getParameters() {
         return parameters;
     }
 
-    public Map<String, String> getMapping() {
-        return mapping;
+    public Corpus getCorpus() {
+        return corpus;
+    }
+
+    public Map<String, String> getExtra() {
+        return extra;
     }
 }

@@ -3,6 +3,8 @@ package org.librairy.service.learner.facade;
 import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
+import org.librairy.service.learner.facade.model.Corpus;
+import org.librairy.service.learner.facade.model.Hyperparameters;
 import org.librairy.service.learner.facade.model.LearnerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,11 +35,11 @@ public class AvroClient {
         if (client != null) client.close();
     }
 
-    public String train(String corpus, Map<String,String> parameters, Map<String,String> mapping) throws AvroRemoteException {
+    public String train(Corpus corpus, Hyperparameters parameters, Map<String,String> extra) throws AvroRemoteException {
 
         // fill in the Message record and send it
-        LOG.debug("Calling proxy.train with corpus:  \"" + corpus +"\" , parameters: " + parameters +" and mapping:" + mapping);
-        String result = proxy.train(corpus, parameters, mapping);
+        LOG.debug("Calling proxy.train with corpus:  \"" + corpus +"\" , parameters: " + parameters + " and extra settings: " + extra);
+        String result = proxy.train(corpus, parameters, extra);
         LOG.debug("Result: " + result);
         return result;
     }

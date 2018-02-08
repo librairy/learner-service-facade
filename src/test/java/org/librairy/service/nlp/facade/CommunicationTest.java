@@ -4,7 +4,12 @@ import org.apache.avro.AvroRemoteException;
 import org.junit.Test;
 import org.librairy.service.learner.facade.AvroClient;
 import org.librairy.service.learner.facade.AvroServer;
+import org.librairy.service.learner.facade.model.Corpus;
+import org.librairy.service.learner.facade.model.Hyperparameters;
+import org.librairy.service.learner.facade.model.Language;
 import org.librairy.service.learner.facade.model.LearnerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,14 +22,17 @@ import java.util.Map;
  */
 public class CommunicationTest {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CommunicationTest.class);
+
     @Test
     public void exchange() throws InterruptedException, IOException {
 
 
         LearnerService customService = new LearnerService() {
 
+
             @Override
-            public String train(String corpus, Map<String, String> parameters, Map<String, String> mapping) throws AvroRemoteException {
+            public String train(Corpus corpus, Hyperparameters parameters, Map<String, String> extra) throws AvroRemoteException {
                 return "done!";
             }
         };
@@ -44,10 +52,11 @@ public class CommunicationTest {
 
         texts.forEach(text -> {
             try {
-                String corpus                   = "localPath";
-                Map<String,String> parameters   = new HashMap<String, String>();
+                Corpus corpus                   = Corpus.newBuilder().setPath("src/main/resources/sample.csv").setLanguage(Language.ES).build();
+                Hyperparameters parameters      = Hyperparameters.newBuilder().build();
                 Map<String,String> mapping      = new HashMap<String, String>();
-                client.train(text, parameters, mapping);
+                String result = client.train(corpus, parameters, mapping);
+                LOG.info("Result: " + result);
             } catch (AvroRemoteException e) {
                 e.printStackTrace();
             }

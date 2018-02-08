@@ -1,9 +1,28 @@
 {"namespace": "org.librairy.service.learner.facade.model",
- "protocol": "LearnerService",
+  "protocol": "LearnerService",
 
- "messages": {
+
+  "types": [
+    {"name": "Language", "type": "enum","symbols": ["EN","ES","FR","DE"]},
+    {"name": "Corpus", "type": "record", "fields": [
+      {"name":"path","type":"string"},
+      {"name":"language", "type": "Language"},
+      {"name":"separator","type":"string","default":";"},
+      {"name":"idIndex","type":"int","default":-1},
+      {"name":"textIndex","type":"int","default":0}
+    ]},
+    {"name": "Hyperparameters", "type": "record", "fields": [
+      {"name": "alpha", "type": "double", "default": 0.1},
+      {"name": "beta", "type": "double", "default": 0.001},
+      {"name": "topics", "type": "int", "default": 5},
+      {"name": "wordsPerTopic", "type": "int", "default": 20},
+      {"name": "iterations", "type": "int", "default": 1000}
+    ]}
+  ],
+
+  "messages": {
      "train": {
-       "request": [{"name": "corpus", "type": "string"},{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}},{"name": "mapping", "type": {"type" : "map","values":"string"}, "default":{}} ],
+       "request": [{"name": "corpus", "type": "Corpus"}, {"name": "parameters", "type": "Hyperparameters"}, {"name": "extra", "type": {"type" : "map","values":"string"}, "default" : {}} ],
        "response": "string"
      }
  }
