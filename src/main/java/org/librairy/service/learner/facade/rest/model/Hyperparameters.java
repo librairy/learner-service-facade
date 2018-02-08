@@ -22,6 +22,8 @@ public class Hyperparameters extends org.librairy.service.learner.facade.model.H
         }
     }
 
+    public Hyperparameters(){}
+
     @Override
     @ApiModelProperty(hidden = true)
     @JsonIgnore

@@ -23,6 +23,8 @@ public class Corpus extends org.librairy.service.learner.facade.model.Corpus{
         }
     }
 
+    public Corpus(){}
+
     @Override
     @ApiModelProperty(hidden = true)
     @JsonIgnore
