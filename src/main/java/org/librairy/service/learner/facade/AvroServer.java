@@ -26,7 +26,6 @@ public class AvroServer {
     }
 
 
-
     public void open(String host, Integer port) throws IOException {
         LOG.debug("Trying to start a Learner service at "+host+":"+port);
         server = new NettyServer(new SpecificResponder(LearnerService.class, service), new InetSocketAddress(InetAddress.getByName(host),port));

@@ -33,7 +33,12 @@ public class CommunicationTest {
 
             @Override
             public String train(Corpus corpus, Hyperparameters parameters, Map<String, String> extra) throws AvroRemoteException {
-                return "done!";
+                return "learning done!";
+            }
+
+            @Override
+            public String inference(Corpus corpus, String model) throws AvroRemoteException {
+                return "inference done!";
             }
         };
         AvroServer server = new AvroServer(customService);

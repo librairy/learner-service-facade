@@ -24,6 +24,10 @@
      "train": {
        "request": [{"name": "corpus", "type": "Corpus"}, {"name": "parameters", "type": "Hyperparameters"}, {"name": "extra", "type": {"type" : "map","values":"string"}, "default" : {}} ],
        "response": "string"
-     }
+     },
+     "inference": {
+      "request": [{"name": "corpus", "type": "Corpus"}, {"name": "model", "type": "string"} ],
+      "response": "string"
+    }
  }
 }

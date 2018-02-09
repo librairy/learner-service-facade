@@ -37,9 +37,16 @@ public class AvroClient {
 
     public String train(Corpus corpus, Hyperparameters parameters, Map<String,String> extra) throws AvroRemoteException {
 
-        // fill in the Message record and send it
         LOG.debug("Calling proxy.train with corpus:  \"" + corpus +"\" , parameters: " + parameters + " and extra settings: " + extra);
         String result = proxy.train(corpus, parameters, extra);
+        LOG.debug("Result: " + result);
+        return result;
+    }
+
+    public String inference(Corpus corpus, String model) throws AvroRemoteException {
+
+        LOG.debug("Calling proxy.inference with corpus:  \"" + corpus +"\" and model: " + model);
+        String result = proxy.inference(corpus, model);
         LOG.debug("Result: " + result);
         return result;
     }
