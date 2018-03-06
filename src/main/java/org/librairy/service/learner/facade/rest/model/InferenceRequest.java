@@ -2,32 +2,26 @@ package org.librairy.service.learner.facade.rest.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Map;
-
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
  */
 
 public class InferenceRequest {
 
-    @ApiModelProperty(notes="model name")
-    private String model;
+    @ApiModelProperty(notes="textual content")
+    private String text;
 
-    @ApiModelProperty(notes="set of texts")
-    private Corpus corpus;
-
-    public InferenceRequest(Corpus corpus, String model) {
-        this.corpus         = corpus;
-        this.model          = model;
+    public InferenceRequest(String text) {
+        this.text = text;
     }
 
     public InferenceRequest(){};
 
-    public Corpus getCorpus() {
-        return corpus;
+    public String getText() {
+        return text;
     }
 
-    public String getModel() {
-        return model;
+    public void setText(String text) {
+        this.text = text;
     }
 }

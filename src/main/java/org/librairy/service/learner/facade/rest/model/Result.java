@@ -6,16 +6,16 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
  */
-public class TrainResult {
+public class Result {
 
     private final String result;
 
-    public TrainResult(String result) {
+    public Result(String result) {
         this.result = result;
     }
 
     @JsonProperty(required = true)
-    @ApiModelProperty(notes = "confirmation of accepted learning process", required = true)
+    @ApiModelProperty(notes = "confirmation of operation requested", required = true)
     public String getResult() {
         return result;
     }

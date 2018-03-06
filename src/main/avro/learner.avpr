@@ -3,31 +3,51 @@
 
 
   "types": [
-    {"name": "Language", "type": "enum","symbols": ["EN","ES","FR","DE"]},
-    {"name": "Corpus", "type": "record", "fields": [
-      {"name":"path","type":"string"},
-      {"name":"language", "type": "Language"},
-      {"name":"separator","type":"string","default":";"},
-      {"name":"idIndex","type":"int","default":-1},
-      {"name":"textIndex","type":"int","default":0}
+    {"name": "Document", "type": "record", "fields": [
+      {"name":"id","type":"string"},
+      {"name":"name", "type": "string", "default": "unknown"},
+      {"name":"labels","type":{"type" : "array","items":"string"}, "default": []},
+      {"name":"text","type":"string"}
     ]},
-    {"name": "Hyperparameters", "type": "record", "fields": [
-      {"name": "alpha", "type": "double", "default": 0.1},
-      {"name": "beta", "type": "double", "default": 0.001},
-      {"name": "topics", "type": "int", "default": 5},
-      {"name": "wordsPerTopic", "type": "int", "default": 20},
-      {"name": "iterations", "type": "int", "default": 1000}
+    {"name": "Word", "type": "record", "fields": [
+      {"name":"value","type":"string","default" : ""},
+      {"name":"score","type":"double","default" : 0.0}
+    ]},
+    {"name": "Topic", "type": "record", "fields": [
+      {"name":"id","type":"int", "default":-1},
+      {"name":"name","type":"string", "default":""},
+      {"name":"description","type":"string", "default":""}
+    ]},
+    {"name": "TopicDistribution", "type": "record", "fields": [
+      {"name":"topic","type":"Topic"},
+      {"name":"score","type":"double", "default": 0.0}
     ]}
   ],
 
   "messages": {
-     "train": {
-       "request": [{"name": "corpus", "type": "Corpus"}, {"name": "parameters", "type": "Hyperparameters"}, {"name": "extra", "type": {"type" : "map","values":"string"}, "default" : {}} ],
-       "response": "string"
-     },
-     "inference": {
-      "request": [{"name": "corpus", "type": "Corpus"}, {"name": "model", "type": "string"} ],
-      "response": "string"
-    }
+      "addDocument": {
+        "request": [{"name": "document", "type": "Document"}],
+        "response": "string"
+      },
+      "reset": {
+        "request": [],
+        "response": "string"
+      },
+      "getTopics":{
+        "request": [],
+        "response": {"type" : "array","items":"Topic"}
+      },
+      "getWords":{
+        "request": [{"name": "topicId", "type": "int"},{"name": "maxWords", "type": "int"}],
+        "response": {"type" : "array","items":"Word"}
+      },
+      "train": {
+        "request": [{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}} ],
+        "response": "string"
+      },
+      "inference": {
+        "request": [{"name": "text", "type": "string"}],
+        "response": {"type" : "array","items":"TopicDistribution"}
+      }
  }
 }

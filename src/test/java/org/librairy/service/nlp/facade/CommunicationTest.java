@@ -4,15 +4,12 @@ import org.apache.avro.AvroRemoteException;
 import org.junit.Test;
 import org.librairy.service.learner.facade.AvroClient;
 import org.librairy.service.learner.facade.AvroServer;
-import org.librairy.service.learner.facade.model.Corpus;
-import org.librairy.service.learner.facade.model.Hyperparameters;
-import org.librairy.service.learner.facade.model.Language;
-import org.librairy.service.learner.facade.model.LearnerService;
+import org.librairy.service.learner.facade.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +29,33 @@ public class CommunicationTest {
 
 
             @Override
-            public String train(Corpus corpus, Hyperparameters parameters, Map<String, String> extra) throws AvroRemoteException {
-                return "learning done!";
+            public String addDocument(Document document) throws AvroRemoteException {
+                return "document added";
             }
 
             @Override
-            public String inference(Corpus corpus, String model) throws AvroRemoteException {
-                return "inference done!";
+            public String reset() throws AvroRemoteException {
+                return "document removed";
+            }
+
+            @Override
+            public List<Topic> getTopics() throws AvroRemoteException {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public List<Word> getWords(int topicId, int maxWords) throws AvroRemoteException {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public String train(Map<String, String> parameters) throws AvroRemoteException {
+                return "model built";
+            }
+
+            @Override
+            public List<TopicDistribution> inference(String text) throws AvroRemoteException {
+                return Collections.emptyList();
             }
         };
         AvroServer server = new AvroServer(customService);
@@ -52,20 +69,13 @@ public class CommunicationTest {
         server.open(host,port);
         client.open(host,port);
 
-        List<String> texts = Arrays.asList(new String[]{"example 1", "example 2", "example 3"});
 
-
-        texts.forEach(text -> {
-            try {
-                Corpus corpus                   = Corpus.newBuilder().setPath("src/main/resources/sample.csv").setLanguage(Language.ES).build();
-                Hyperparameters parameters      = Hyperparameters.newBuilder().build();
-                Map<String,String> mapping      = new HashMap<String, String>();
-                String result = client.train(corpus, parameters, mapping);
-                LOG.info("Result: " + result);
-            } catch (AvroRemoteException e) {
-                e.printStackTrace();
-            }
-        });
+        client.addDocument(Document.newBuilder().setId("doc1").setText("textual content").build());
+        client.reset();
+        client.train(new HashMap<>());
+        client.getTopics();
+        client.getWords(1,10);
+        client.inference("sample text");
 
         client.close();
         server.close();
