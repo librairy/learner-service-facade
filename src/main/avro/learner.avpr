@@ -8,6 +8,10 @@
       {"name":"name", "type": "string", "default": "unknown"},
       {"name":"labels","type":{"type" : "array","items":"string"}, "default": []},
       {"name":"text","type":"string"}
+    ]},
+    {"name": "Corpus", "type": "record", "fields": [
+      {"name":"size","type":"int"},
+      {"name":"updated", "type": "string"}
     ]}
   ],
 
@@ -23,6 +27,10 @@
       "train": {
         "request": [{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}} ],
         "response": "string"
+      },
+      "getCorpus": {
+        "request": [],
+        "response": "Corpus"
       }
  }
 }

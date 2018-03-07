@@ -8,10 +8,11 @@ package org.librairy.service.learner.facade.model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public interface LearnerService {
-  public static final org.apache.avro.Protocol PROTOCOL = org.apache.avro.Protocol.parse("{\"protocol\":\"LearnerService\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"types\":[{\"type\":\"record\",\"name\":\"Document\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"unknown\"},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}],\"messages\":{\"addDocument\":{\"request\":[{\"name\":\"document\",\"type\":\"Document\"}],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"reset\":{\"request\":[],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"train\":{\"request\":[{\"name\":\"parameters\",\"type\":{\"type\":\"map\",\"values\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"avro.java.string\":\"String\"},\"default\":{}}],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}}");
+  public static final org.apache.avro.Protocol PROTOCOL = org.apache.avro.Protocol.parse("{\"protocol\":\"LearnerService\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"types\":[{\"type\":\"record\",\"name\":\"Document\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"unknown\"},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]},{\"type\":\"record\",\"name\":\"Corpus\",\"fields\":[{\"name\":\"size\",\"type\":\"int\"},{\"name\":\"updated\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}],\"messages\":{\"addDocument\":{\"request\":[{\"name\":\"document\",\"type\":\"Document\"}],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"reset\":{\"request\":[],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"train\":{\"request\":[{\"name\":\"parameters\",\"type\":{\"type\":\"map\",\"values\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"avro.java.string\":\"String\"},\"default\":{}}],\"response\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"getCorpus\":{\"request\":[],\"response\":\"Corpus\"}}}");
   java.lang.String addDocument(org.librairy.service.learner.facade.model.Document document) throws org.apache.avro.AvroRemoteException;
   java.lang.String reset() throws org.apache.avro.AvroRemoteException;
   java.lang.String train(java.util.Map<java.lang.String,java.lang.String> parameters) throws org.apache.avro.AvroRemoteException;
+  org.librairy.service.learner.facade.model.Corpus getCorpus() throws org.apache.avro.AvroRemoteException;
 
   @SuppressWarnings("all")
   public interface Callback extends LearnerService {
@@ -19,5 +20,6 @@ public interface LearnerService {
     void addDocument(org.librairy.service.learner.facade.model.Document document, org.apache.avro.ipc.Callback<java.lang.String> callback) throws java.io.IOException;
     void reset(org.apache.avro.ipc.Callback<java.lang.String> callback) throws java.io.IOException;
     void train(java.util.Map<java.lang.String,java.lang.String> parameters, org.apache.avro.ipc.Callback<java.lang.String> callback) throws java.io.IOException;
+    void getCorpus(org.apache.avro.ipc.Callback<org.librairy.service.learner.facade.model.Corpus> callback) throws java.io.IOException;
   }
 }

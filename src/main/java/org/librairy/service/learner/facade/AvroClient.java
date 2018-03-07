@@ -3,6 +3,7 @@ package org.librairy.service.learner.facade;
 import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
+import org.librairy.service.learner.facade.model.Corpus;
 import org.librairy.service.learner.facade.model.Document;
 import org.librairy.service.learner.facade.model.LearnerService;
 import org.slf4j.Logger;
@@ -56,6 +57,14 @@ public class AvroClient {
 
         LOG.debug("Calling proxy.train with  parameters: " + parameters);
         String result = proxy.train(parameters);
+        LOG.debug("Result: " + result);
+        return result;
+    }
+
+    public Corpus getCorpus() throws AvroRemoteException {
+
+        LOG.debug("Calling proxy.getCorpus");
+        Corpus result= proxy.getCorpus();
         LOG.debug("Result: " + result);
         return result;
     }

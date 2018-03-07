@@ -4,6 +4,7 @@ import org.apache.avro.AvroRemoteException;
 import org.junit.Test;
 import org.librairy.service.learner.facade.AvroClient;
 import org.librairy.service.learner.facade.AvroServer;
+import org.librairy.service.learner.facade.model.Corpus;
 import org.librairy.service.learner.facade.model.Document;
 import org.librairy.service.learner.facade.model.LearnerService;
 import org.slf4j.Logger;
@@ -41,6 +42,11 @@ public class CommunicationTest {
             public String train(Map<String, String> parameters) throws AvroRemoteException {
                 return "model built";
             }
+
+            @Override
+            public Corpus getCorpus() throws AvroRemoteException {
+                return new Corpus();
+            }
         };
         AvroServer server = new AvroServer(customService);
 
@@ -57,6 +63,7 @@ public class CommunicationTest {
         client.addDocument(Document.newBuilder().setId("doc1").setText("textual content").build());
         client.reset();
         client.train(new HashMap<>());
+        client.getCorpus();
 
         client.close();
         server.close();
