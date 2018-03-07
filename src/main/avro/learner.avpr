@@ -8,19 +8,6 @@
       {"name":"name", "type": "string", "default": "unknown"},
       {"name":"labels","type":{"type" : "array","items":"string"}, "default": []},
       {"name":"text","type":"string"}
-    ]},
-    {"name": "Word", "type": "record", "fields": [
-      {"name":"value","type":"string","default" : ""},
-      {"name":"score","type":"double","default" : 0.0}
-    ]},
-    {"name": "Topic", "type": "record", "fields": [
-      {"name":"id","type":"int", "default":-1},
-      {"name":"name","type":"string", "default":""},
-      {"name":"description","type":"string", "default":""}
-    ]},
-    {"name": "TopicDistribution", "type": "record", "fields": [
-      {"name":"topic","type":"Topic"},
-      {"name":"score","type":"double", "default": 0.0}
     ]}
   ],
 
@@ -33,21 +20,9 @@
         "request": [],
         "response": "string"
       },
-      "getTopics":{
-        "request": [],
-        "response": {"type" : "array","items":"Topic"}
-      },
-      "getWords":{
-        "request": [{"name": "topicId", "type": "int"},{"name": "maxWords", "type": "int"}],
-        "response": {"type" : "array","items":"Word"}
-      },
       "train": {
         "request": [{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}} ],
         "response": "string"
-      },
-      "inference": {
-        "request": [{"name": "text", "type": "string"}],
-        "response": {"type" : "array","items":"TopicDistribution"}
       }
  }
 }

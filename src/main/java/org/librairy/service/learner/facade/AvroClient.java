@@ -3,7 +3,8 @@ package org.librairy.service.learner.facade;
 import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
-import org.librairy.service.learner.facade.model.*;
+import org.librairy.service.learner.facade.model.Document;
+import org.librairy.service.learner.facade.model.LearnerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,30 +56,6 @@ public class AvroClient {
 
         LOG.debug("Calling proxy.train with  parameters: " + parameters);
         String result = proxy.train(parameters);
-        LOG.debug("Result: " + result);
-        return result;
-    }
-
-    public List<TopicDistribution> inference(String text) throws AvroRemoteException {
-
-        LOG.debug("Calling proxy.inference with text: " + text);
-        List<TopicDistribution> topics = proxy.inference(text);
-        LOG.debug("Result: " + topics);
-        return topics;
-    }
-
-    public List<Topic> getTopics() throws AvroRemoteException {
-        // fill in the Message record and send it
-        LOG.debug("Calling proxy.getTopics");
-        List<Topic> result = proxy.getTopics();
-        LOG.debug("Result: " + result);
-        return result;
-    }
-
-    public List<Word> getWords(Integer topicId, Integer maxWords) throws AvroRemoteException {
-        // fill in the Message record and send it
-        LOG.debug("Calling proxy.getWords");
-        List<Word> result = proxy.getWords(topicId, maxWords);
         LOG.debug("Result: " + result);
         return result;
     }
