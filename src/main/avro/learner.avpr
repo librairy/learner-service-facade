@@ -17,7 +17,7 @@
 
   "messages": {
       "addDocument": {
-        "request": [{"name": "document", "type": "Document"}],
+        "request": [{"name": "document", "type": "Document"},{"name": "multigrams", "type": "boolean", "default": false}],
         "response": "string"
       },
       "reset": {

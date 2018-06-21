@@ -45,10 +45,10 @@ public class AvroClient {
     }
 
 
-    public String addDocument(Document document) throws AvroRemoteException {
+    public String addDocument(Document document, Boolean multigrams) throws AvroRemoteException {
 
         LOG.debug("Calling proxy.addDocument with: " + document);
-        String result= proxy.addDocument(document);
+        String result= proxy.addDocument(document, multigrams);
         LOG.debug("Result: " + result);
         return result;
     }
