@@ -29,7 +29,7 @@ public class CommunicationTest {
 
 
             @Override
-            public String addDocument(Document document, boolean multigrams) throws AvroRemoteException {
+            public String addDocument(Document document, boolean multigrams, boolean raw) throws AvroRemoteException {
                 return "document added";
             }
 
@@ -60,7 +60,7 @@ public class CommunicationTest {
         client.open(host,port);
 
 
-        client.addDocument(Document.newBuilder().setId("doc1").setText("textual content").build(),false);
+        client.addDocument(Document.newBuilder().setId("doc1").setText("textual content").build(),false,false);
         client.reset();
         client.train(new HashMap<>());
         client.getCorpus();
