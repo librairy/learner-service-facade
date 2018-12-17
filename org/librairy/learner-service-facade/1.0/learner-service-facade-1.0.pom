@@ -64,6 +64,7 @@
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <jackson.version>2.8.0</jackson.version>
         <junit.version>4.12</junit.version>
+        <librairy.modeler.version>[1.0,)</librairy.modeler.version>
         <logback.version>1.1.3</logback.version>
         <swagger.annotations>1.5.13</swagger.annotations>
     </properties>
@@ -71,6 +72,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- librAIry Model Service -->
+            <dependency>
+                <groupId>org.librairy</groupId>
+                <artifactId>modeler-service-facade</artifactId>
+                <version>${librairy.modeler.version}</version>
+            </dependency>
 
             <!-- Log Libraries -->
             <dependency>
@@ -129,6 +137,19 @@
     </dependencyManagement>
 
     <dependencies>
+
+
+        <!-- librAIry Model Service -->
+        <dependency>
+            <groupId>org.librairy</groupId>
+            <artifactId>modeler-service-facade</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 		<!-- AVRO dependencies -->
         <dependency>
@@ -202,7 +223,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${project.basedir}/src/main/java/org/librairy/service/ner/facade/model</directory>
+                            <directory>${project.basedir}/src/main/java/org/librairy/service/learner/facade/model</directory>
                             <includes>
                                 <include>**</include>
                             </includes>
@@ -293,5 +314,19 @@
 
         </plugins>
     </build>
+
+    <repositories>
+
+        <!-- librAIry Modeler Repository -->
+        <repository>
+            <id>modeler-service</id>
+            <url>https://raw.github.com/librairy/modeler-service-facade/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
+    </repositories>
 
 </project>
