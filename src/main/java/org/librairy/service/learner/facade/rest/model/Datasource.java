@@ -58,6 +58,18 @@ public class DataSource extends org.librairy.service.learner.facade.model.DataSo
     }
 
     @Override
+    @ApiModelProperty(value = "skip documents")
+    public Long getOffset() {
+        return super.getOffset();
+    }
+
+    @Override
+    @ApiModelProperty(value = "save datasource in cache")
+    public Boolean getCache() {
+        return super.getCache();
+    }
+
+    @Override
     @ApiModelProperty(value = "document fields")
     public DataFields getFields() {
         return new DataFields(super.getFields());

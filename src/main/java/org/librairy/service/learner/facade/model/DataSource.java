@@ -7,13 +7,14 @@ package org.librairy.service.learner.facade.model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DataSource extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
    private java.lang.String url;
    private java.lang.String format;
    private java.lang.String filter;
    private long size;
    private long offset;
+   private boolean cache;
    private org.librairy.service.learner.facade.model.DataFields fields;
 
   /**
@@ -26,12 +27,13 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   /**
    * All-args constructor.
    */
-  public DataSource(java.lang.String url, java.lang.String format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, org.librairy.service.learner.facade.model.DataFields fields) {
+  public DataSource(java.lang.String url, java.lang.String format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, java.lang.Boolean cache, org.librairy.service.learner.facade.model.DataFields fields) {
     this.url = url;
     this.format = format;
     this.filter = filter;
     this.size = size;
     this.offset = offset;
+    this.cache = cache;
     this.fields = fields;
   }
 
@@ -44,7 +46,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     case 2: return filter;
     case 3: return size;
     case 4: return offset;
-    case 5: return fields;
+    case 5: return cache;
+    case 6: return fields;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -57,7 +60,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     case 2: filter = (java.lang.String)value$; break;
     case 3: size = (java.lang.Long)value$; break;
     case 4: offset = (java.lang.Long)value$; break;
-    case 5: fields = (org.librairy.service.learner.facade.model.DataFields)value$; break;
+    case 5: cache = (java.lang.Boolean)value$; break;
+    case 6: fields = (org.librairy.service.learner.facade.model.DataFields)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -138,6 +142,21 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   /**
+   * Gets the value of the 'cache' field.
+   */
+  public java.lang.Boolean getCache() {
+    return cache;
+  }
+
+  /**
+   * Sets the value of the 'cache' field.
+   * @param value the value to set.
+   */
+  public void setCache(java.lang.Boolean value) {
+    this.cache = value;
+  }
+
+  /**
    * Gets the value of the 'fields' field.
    */
   public org.librairy.service.learner.facade.model.DataFields getFields() {
@@ -178,6 +197,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     private java.lang.String filter;
     private long size;
     private long offset;
+    private boolean cache;
     private org.librairy.service.learner.facade.model.DataFields fields;
 
     /** Creates a new Builder */
@@ -208,9 +228,13 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         this.offset = data().deepCopy(fields()[4].schema(), other.offset);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.fields)) {
-        this.fields = data().deepCopy(fields()[5].schema(), other.fields);
+      if (isValidValue(fields()[5], other.cache)) {
+        this.cache = data().deepCopy(fields()[5].schema(), other.cache);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.fields)) {
+        this.fields = data().deepCopy(fields()[6].schema(), other.fields);
+        fieldSetFlags()[6] = true;
       }
     }
     
@@ -237,9 +261,13 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         this.offset = data().deepCopy(fields()[4].schema(), other.offset);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.fields)) {
-        this.fields = data().deepCopy(fields()[5].schema(), other.fields);
+      if (isValidValue(fields()[5], other.cache)) {
+        this.cache = data().deepCopy(fields()[5].schema(), other.cache);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.fields)) {
+        this.fields = data().deepCopy(fields()[6].schema(), other.fields);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -366,6 +394,30 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
       return this;
     }
 
+    /** Gets the value of the 'cache' field */
+    public java.lang.Boolean getCache() {
+      return cache;
+    }
+    
+    /** Sets the value of the 'cache' field */
+    public org.librairy.service.learner.facade.model.DataSource.Builder setCache(boolean value) {
+      validate(fields()[5], value);
+      this.cache = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'cache' field has been set */
+    public boolean hasCache() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'cache' field */
+    public org.librairy.service.learner.facade.model.DataSource.Builder clearCache() {
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
     /** Gets the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataFields getFields() {
       return fields;
@@ -373,21 +425,21 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     
     /** Sets the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataSource.Builder setFields(org.librairy.service.learner.facade.model.DataFields value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.fields = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'fields' field has been set */
     public boolean hasFields() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataSource.Builder clearFields() {
       fields = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -400,7 +452,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         record.filter = fieldSetFlags()[2] ? this.filter : (java.lang.String) defaultValue(fields()[2]);
         record.size = fieldSetFlags()[3] ? this.size : (java.lang.Long) defaultValue(fields()[3]);
         record.offset = fieldSetFlags()[4] ? this.offset : (java.lang.Long) defaultValue(fields()[4]);
-        record.fields = fieldSetFlags()[5] ? this.fields : (org.librairy.service.learner.facade.model.DataFields) defaultValue(fields()[5]);
+        record.cache = fieldSetFlags()[5] ? this.cache : (java.lang.Boolean) defaultValue(fields()[5]);
+        record.fields = fieldSetFlags()[6] ? this.fields : (org.librairy.service.learner.facade.model.DataFields) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
