@@ -3,34 +3,36 @@
 
 
   "types": [
-    {"name": "Document", "type": "record", "fields": [
-      {"name":"id","type":"string"},
-      {"name":"name", "type": "string", "default": "unknown"},
+    {"name": "DataFields", "type": "record", "fields": [
+      {"name":"id", "type": "string"},
       {"name":"labels","type":{"type" : "array","items":"string"}, "default": []},
-      {"name":"text","type":"string"}
+      {"name":"text","type":{"type" : "array","items":"string"}, "default": []}
     ]},
-    {"name": "Corpus", "type": "record", "fields": [
-      {"name":"size","type":"int"},
-      {"name":"updated", "type": "string"}
+    {"name": "DataSource", "type": "record", "fields": [
+      {"name":"url","type":"string"},
+      {"name":"format","type":"string"},
+      {"name":"filter", "type": "string"},
+      {"name":"size", "type": "long"},
+      {"name":"fields", "type": "DataFields"}
+    ]},
+    {"name": "TopicsRequest", "type": "record", "fields": [
+      {"name":"name","type":"string"},
+      {"name":"description", "type": "string", "default": "created by librAIry"},
+      {"name":"version", "type": "string", "default": "1.0"},
+      {"name":"contactEmail", "type": "string"},
+      {"name":"parameters","type":{"type" : "map","values":"string"}, "default": {}},
+      {"name":"from","type":"DataSource"}
     ]}
   ],
 
   "messages": {
-      "addDocument": {
-        "request": [{"name": "document", "type": "Document"},{"name": "multigrams", "type": "boolean", "default": false}, {"name": "raw", "type": "boolean", "default": false}],
+      "createTopics": {
+        "request": [{"name": "request", "type": "TopicsRequest"}],
         "response": "string"
       },
-      "reset": {
+      "cleanCache": {
         "request": [],
         "response": "string"
-      },
-      "train": {
-        "request": [{"name": "parameters", "type": {"type" : "map","values":"string"}, "default" : {}} ],
-        "response": "string"
-      },
-      "getCorpus": {
-        "request": [],
-        "response": "Corpus"
       }
  }
 }

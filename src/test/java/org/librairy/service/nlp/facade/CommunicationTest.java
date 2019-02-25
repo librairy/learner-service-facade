@@ -4,15 +4,15 @@ import org.apache.avro.AvroRemoteException;
 import org.junit.Test;
 import org.librairy.service.learner.facade.AvroClient;
 import org.librairy.service.learner.facade.AvroServer;
-import org.librairy.service.learner.facade.model.Corpus;
-import org.librairy.service.learner.facade.model.Document;
+import org.librairy.service.learner.facade.model.DataFields;
+import org.librairy.service.learner.facade.model.DataSource;
 import org.librairy.service.learner.facade.model.LearnerService;
+import org.librairy.service.learner.facade.model.TopicsRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
@@ -29,23 +29,13 @@ public class CommunicationTest {
 
 
             @Override
-            public String addDocument(Document document, boolean multigrams, boolean raw) throws AvroRemoteException {
-                return "document added";
+            public String createTopics(TopicsRequest request) throws AvroRemoteException {
+                return "new topic model queued";
             }
 
             @Override
-            public String reset() throws AvroRemoteException {
-                return "document removed";
-            }
-
-            @Override
-            public String train(Map<String, String> parameters) throws AvroRemoteException {
-                return "model built";
-            }
-
-            @Override
-            public Corpus getCorpus() throws AvroRemoteException {
-                return new Corpus();
+            public String cleanCache() throws AvroRemoteException {
+                return "cache removed";
             }
         };
         AvroServer server = new AvroServer(customService);
@@ -60,10 +50,27 @@ public class CommunicationTest {
         client.open(host,port);
 
 
-        client.addDocument(Document.newBuilder().setId("doc1").setText("textual content").build(),false,false);
-        client.reset();
-        client.train(new HashMap<>());
-        client.getCorpus();
+        client.createTopics(TopicsRequest.newBuilder()
+                .setName("tm1")
+                .setDescription("test model")
+                .setContactEmail("sample@mail.com")
+                .setVersion("1.0")
+                .setFrom(
+                        DataSource.newBuilder()
+                                .setUrl("/src/test/resources/sample.txt")
+                                .setSize(-1)
+                                .setFormat("txt")
+                                .setFields(
+                                        DataFields.newBuilder()
+                                                .setId("id")
+                                                .setText(Arrays.asList("title","content"))
+                                                .build()
+                                )
+                                .build()
+
+                )
+                .build());
+        client.cleanCache();
 
         client.close();
         server.close();

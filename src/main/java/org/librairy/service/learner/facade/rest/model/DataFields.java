@@ -6,15 +6,16 @@ import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
  */
-public class Corpus extends org.librairy.service.learner.facade.model.Corpus{
+public class DataFields extends org.librairy.service.learner.facade.model.DataFields{
 
-    public Corpus(org.librairy.service.learner.facade.model.Corpus corpus){
+    public DataFields(org.librairy.service.learner.facade.model.DataFields dataFields){
         try {
-            BeanUtils.copyProperties(this,corpus);
+            BeanUtils.copyProperties(this,dataFields);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
@@ -22,7 +23,7 @@ public class Corpus extends org.librairy.service.learner.facade.model.Corpus{
         }
     }
 
-    public Corpus(){}
+    public DataFields(){}
 
     @Override
     @ApiModelProperty(hidden = true)
@@ -32,16 +33,22 @@ public class Corpus extends org.librairy.service.learner.facade.model.Corpus{
     }
 
     @Override
-    @ApiModelProperty(value = "number of documents")
-    public Integer getSize() {
-        return super.getSize();
+    @ApiModelProperty(value = "document id")
+    public String getId() {
+        return super.getId();
     }
 
     @Override
-    @ApiModelProperty(value = "last document added")
-    public String getUpdated() {
-        return super.getUpdated();
+    @ApiModelProperty(value = "document labels")
+    public List<String> getLabels() {
+        return super.getLabels();
     }
 
+    @Override
+    @ApiModelProperty(value = "document text")
+    public List<String> getText() {
+        return super.getText();
+    }
+    
 
 }

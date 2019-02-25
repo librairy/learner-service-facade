@@ -3,17 +3,14 @@ package org.librairy.service.learner.facade;
 import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
-import org.librairy.service.learner.facade.model.Corpus;
-import org.librairy.service.learner.facade.model.Document;
 import org.librairy.service.learner.facade.model.LearnerService;
+import org.librairy.service.learner.facade.model.TopicsRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
@@ -36,35 +33,19 @@ public class AvroClient {
         if (client != null) client.close();
     }
 
-    public String reset() throws AvroRemoteException {
+    public String createTopics(TopicsRequest request) throws AvroRemoteException {
 
-        LOG.debug("Calling proxy.reset");
-        String result= proxy.reset();
+        LOG.debug("Calling proxy.createTopics");
+        String result= proxy.createTopics(request);
         LOG.debug("Result: " + result);
         return result;
     }
 
 
-    public String addDocument(Document document, Boolean multigrams, Boolean raw) throws AvroRemoteException {
+    public String cleanCache() throws AvroRemoteException {
 
-        LOG.debug("Calling proxy.addDocument with: " + document);
-        String result= proxy.addDocument(document, multigrams, raw);
-        LOG.debug("Result: " + result);
-        return result;
-    }
-
-    public String train(Map<String,String> parameters) throws AvroRemoteException {
-
-        LOG.debug("Calling proxy.train with  parameters: " + parameters);
-        String result = proxy.train(parameters);
-        LOG.debug("Result: " + result);
-        return result;
-    }
-
-    public Corpus getCorpus() throws AvroRemoteException {
-
-        LOG.debug("Calling proxy.getCorpus");
-        Corpus result= proxy.getCorpus();
+        LOG.debug("Calling proxy.cleanCache ");
+        String result= proxy.cleanCache();
         LOG.debug("Result: " + result);
         return result;
     }
