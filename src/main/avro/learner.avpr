@@ -11,8 +11,9 @@
     {"name": "DataSource", "type": "record", "fields": [
       {"name":"url","type":"string"},
       {"name":"format","type":"string"},
-      {"name":"filter", "type": "string"},
-      {"name":"size", "type": "long"},
+      {"name":"filter", "type": "string", "default": ""},
+      {"name":"size", "type": "long", "default": -1},
+      {"name":"offset", "type": "long", "default": 0},
       {"name":"fields", "type": "DataFields"}
     ]},
     {"name": "TopicsRequest", "type": "record", "fields": [
