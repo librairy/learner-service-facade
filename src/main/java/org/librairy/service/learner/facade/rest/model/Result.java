@@ -24,6 +24,10 @@ public class Result extends org.librairy.service.learner.facade.model.Result{
 
     public Result(){}
 
+    public Result(String date, String status, String message) {
+        super(date, status, message);
+    }
+
     @Override
     @ApiModelProperty(hidden = true)
     @JsonIgnore

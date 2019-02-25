@@ -25,6 +25,10 @@ public class DataFields extends org.librairy.service.learner.facade.model.DataFi
 
     public DataFields(){}
 
+    public DataFields(String id, List<String> labels, List<String> text) {
+        super(id, labels, text);
+    }
+
     @Override
     @ApiModelProperty(hidden = true)
     @JsonIgnore
@@ -49,6 +53,6 @@ public class DataFields extends org.librairy.service.learner.facade.model.DataFi
     public List<String> getText() {
         return super.getText();
     }
-    
+
 
 }
