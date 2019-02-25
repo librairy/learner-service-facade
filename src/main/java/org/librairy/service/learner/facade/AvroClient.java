@@ -4,6 +4,7 @@ import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
 import org.librairy.service.learner.facade.model.LearnerService;
+import org.librairy.service.learner.facade.model.Result;
 import org.librairy.service.learner.facade.model.TopicsRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,19 +34,19 @@ public class AvroClient {
         if (client != null) client.close();
     }
 
-    public String createTopics(TopicsRequest request) throws AvroRemoteException {
+    public Result createTopics(TopicsRequest request) throws AvroRemoteException {
 
         LOG.debug("Calling proxy.createTopics");
-        String result= proxy.createTopics(request);
+        Result result= proxy.createTopics(request);
         LOG.debug("Result: " + result);
         return result;
     }
 
 
-    public String cleanCache() throws AvroRemoteException {
+    public Result cleanCache() throws AvroRemoteException {
 
         LOG.debug("Calling proxy.cleanCache ");
-        String result= proxy.cleanCache();
+        Result result= proxy.cleanCache();
         LOG.debug("Result: " + result);
         return result;
     }

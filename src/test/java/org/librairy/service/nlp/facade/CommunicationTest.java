@@ -4,15 +4,13 @@ import org.apache.avro.AvroRemoteException;
 import org.junit.Test;
 import org.librairy.service.learner.facade.AvroClient;
 import org.librairy.service.learner.facade.AvroServer;
-import org.librairy.service.learner.facade.model.DataFields;
-import org.librairy.service.learner.facade.model.DataSource;
-import org.librairy.service.learner.facade.model.LearnerService;
-import org.librairy.service.learner.facade.model.TopicsRequest;
+import org.librairy.service.learner.facade.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
@@ -29,13 +27,13 @@ public class CommunicationTest {
 
 
             @Override
-            public String createTopics(TopicsRequest request) throws AvroRemoteException {
-                return "new topic model queued";
+            public Result createTopics(TopicsRequest request) throws AvroRemoteException {
+                return Result.newBuilder().setDate(new Date().toString()).setStatus("QUEUED").setMessage("new topic model queued").build();
             }
 
             @Override
-            public String cleanCache() throws AvroRemoteException {
-                return "cache removed";
+            public Result cleanCache() throws AvroRemoteException {
+                return Result.newBuilder().setDate(new Date().toString()).setStatus("ACCEPTED").setMessage("cache removed").build();
             }
         };
         AvroServer server = new AvroServer(customService);

@@ -22,17 +22,22 @@
       {"name":"contactEmail", "type": "string"},
       {"name":"parameters","type":{"type" : "map","values":"string"}, "default": {}},
       {"name":"from","type":"DataSource"}
+    ]},
+    {"name": "Result", "type": "record", "fields": [
+      {"name":"date", "type": "string"},
+      {"name":"status","type":"string"},
+      {"name":"message", "type": "string", "default": "thanks for using librAIry"}
     ]}
   ],
 
   "messages": {
       "createTopics": {
         "request": [{"name": "request", "type": "TopicsRequest"}],
-        "response": "string"
+        "response": "Result"
       },
       "cleanCache": {
         "request": [],
-        "response": "string"
+        "response": "Result"
       }
  }
 }
