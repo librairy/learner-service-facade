@@ -2,6 +2,7 @@ package org.librairy.service.learner.facade.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.common.base.Strings;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
@@ -77,6 +78,19 @@ public class TopicsRequest extends org.librairy.service.learner.facade.model.Top
     @ApiModelProperty(value = "data source")
     public DataSource getFrom() {
         return new DataSource(super.getFrom());
+    }
+
+    public boolean isValid(){
+
+        if (Strings.isNullOrEmpty(getName())) return false;
+        if (Strings.isNullOrEmpty(getContactEmail())) return false;
+        if (Strings.isNullOrEmpty(getVersion())) return false;
+
+        if (get("from") == null) return false;
+
+        return getFrom().isValid();
+
+
     }
 
 }

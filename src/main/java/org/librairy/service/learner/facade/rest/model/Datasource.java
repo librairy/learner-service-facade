@@ -2,6 +2,7 @@ package org.librairy.service.learner.facade.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.common.base.Strings;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
@@ -85,6 +86,13 @@ public class DataSource extends org.librairy.service.learner.facade.model.DataSo
     @ApiModelProperty(value = "data credentials")
     public Credentials getCredentials() {
         return new Credentials(super.getCredentials());
+    }
+
+    public boolean isValid(){
+        if (Strings.isNullOrEmpty(getUrl())) return false;
+        if (get("fields") == null) return false;
+
+        return getFields().isValid();
     }
 
 }

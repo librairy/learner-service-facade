@@ -2,6 +2,7 @@ package org.librairy.service.learner.facade.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.common.base.Strings;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
@@ -61,4 +62,13 @@ public class DataFields extends org.librairy.service.learner.facade.model.DataFi
     }
 
 
+    public boolean isValid(){
+
+        if (Strings.isNullOrEmpty(getId())) return false;
+
+        if (get("text") == null) return false;
+        if (getText().isEmpty()) return false;
+
+        return true;
+    }
 }
