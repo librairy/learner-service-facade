@@ -55,9 +55,9 @@ public class CommunicationTest {
                 .setVersion("1.0")
                 .setFrom(
                         DataSource.newBuilder()
-                                .setUrl("/src/test/resources/sample.txt")
+                                .setUrl("/src/test/resources/sample.csv")
                                 .setSize(-1)
-                                .setFormat("txt")
+                                .setFormat(Format.CSV)
                                 .setFields(
                                         DataFields.newBuilder()
                                                 .setId("id")

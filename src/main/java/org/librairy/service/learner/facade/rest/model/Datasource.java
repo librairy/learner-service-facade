@@ -41,7 +41,7 @@ public class DataSource extends org.librairy.service.learner.facade.model.DataSo
 
     @Override
     @ApiModelProperty(value = "data format")
-    public String getFormat() {
+    public Format getFormat() {
         return super.getFormat();
     }
 

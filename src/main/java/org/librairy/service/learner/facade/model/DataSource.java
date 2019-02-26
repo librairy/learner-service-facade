@@ -7,10 +7,10 @@ package org.librairy.service.learner.facade.model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DataSource extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"credentials\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Credentials\",\"fields\":[{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apikey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}],\"default\":null},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"enum\",\"name\":\"Format\",\"symbols\":[\"SOLR_CORE\",\"CSV\",\"CSV_TAR_GZ\",\"JSONL\",\"JSONL_TAR_GZ\"]}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"credentials\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Credentials\",\"fields\":[{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apikey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}],\"default\":null},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
    private java.lang.String url;
-   private java.lang.String format;
+   private org.librairy.service.learner.facade.model.Format format;
    private java.lang.String filter;
    private long size;
    private long offset;
@@ -28,7 +28,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   /**
    * All-args constructor.
    */
-  public DataSource(java.lang.String url, java.lang.String format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, java.lang.Boolean cache, org.librairy.service.learner.facade.model.Credentials credentials, org.librairy.service.learner.facade.model.DataFields fields) {
+  public DataSource(java.lang.String url, org.librairy.service.learner.facade.model.Format format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, java.lang.Boolean cache, org.librairy.service.learner.facade.model.Credentials credentials, org.librairy.service.learner.facade.model.DataFields fields) {
     this.url = url;
     this.format = format;
     this.filter = filter;
@@ -59,7 +59,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: url = (java.lang.String)value$; break;
-    case 1: format = (java.lang.String)value$; break;
+    case 1: format = (org.librairy.service.learner.facade.model.Format)value$; break;
     case 2: filter = (java.lang.String)value$; break;
     case 3: size = (java.lang.Long)value$; break;
     case 4: offset = (java.lang.Long)value$; break;
@@ -88,7 +88,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   /**
    * Gets the value of the 'format' field.
    */
-  public java.lang.String getFormat() {
+  public org.librairy.service.learner.facade.model.Format getFormat() {
     return format;
   }
 
@@ -96,7 +96,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'format' field.
    * @param value the value to set.
    */
-  public void setFormat(java.lang.String value) {
+  public void setFormat(org.librairy.service.learner.facade.model.Format value) {
     this.format = value;
   }
 
@@ -212,7 +212,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     implements org.apache.avro.data.RecordBuilder<DataSource> {
 
     private java.lang.String url;
-    private java.lang.String format;
+    private org.librairy.service.learner.facade.model.Format format;
     private java.lang.String filter;
     private long size;
     private long offset;
@@ -325,12 +325,12 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     }
 
     /** Gets the value of the 'format' field */
-    public java.lang.String getFormat() {
+    public org.librairy.service.learner.facade.model.Format getFormat() {
       return format;
     }
     
     /** Sets the value of the 'format' field */
-    public org.librairy.service.learner.facade.model.DataSource.Builder setFormat(java.lang.String value) {
+    public org.librairy.service.learner.facade.model.DataSource.Builder setFormat(org.librairy.service.learner.facade.model.Format value) {
       validate(fields()[1], value);
       this.format = value;
       fieldSetFlags()[1] = true;
@@ -501,7 +501,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
       try {
         DataSource record = new DataSource();
         record.url = fieldSetFlags()[0] ? this.url : (java.lang.String) defaultValue(fields()[0]);
-        record.format = fieldSetFlags()[1] ? this.format : (java.lang.String) defaultValue(fields()[1]);
+        record.format = fieldSetFlags()[1] ? this.format : (org.librairy.service.learner.facade.model.Format) defaultValue(fields()[1]);
         record.filter = fieldSetFlags()[2] ? this.filter : (java.lang.String) defaultValue(fields()[2]);
         record.size = fieldSetFlags()[3] ? this.size : (java.lang.Long) defaultValue(fields()[3]);
         record.offset = fieldSetFlags()[4] ? this.offset : (java.lang.Long) defaultValue(fields()[4]);

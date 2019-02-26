@@ -3,6 +3,7 @@
 
 
   "types": [
+    {"name": "Format", "type": "enum","symbols": ["SOLR_CORE","CSV","CSV_TAR_GZ","JSONL","JSONL_TAR_GZ"]},
     {"name": "Credentials", "type": "record", "fields": [
       {"name":"user", "type":["null","string"],"default":null},
       {"name":"password","type":["null","string"],"default":null},
@@ -15,7 +16,7 @@
     ]},
     {"name": "DataSource", "type": "record", "fields": [
       {"name":"url","type":"string"},
-      {"name":"format","type":"string"},
+      {"name":"format","type":"Format"},
       {"name":"filter", "type": "string", "default": ""},
       {"name":"size", "type": "long", "default": -1},
       {"name":"offset", "type": "long", "default": 0},
