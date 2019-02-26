@@ -30,6 +30,7 @@
       {"name":"version", "type": "string", "default": "1.0"},
       {"name":"contactEmail", "type": "string"},
       {"name":"parameters","type":{"type" : "map","values":"string"}, "default": {}},
+      {"name":"annotate","type":"boolean", "default": false},
       {"name":"from","type":"DataSource"}
     ]},
     {"name": "Result", "type": "record", "fields": [

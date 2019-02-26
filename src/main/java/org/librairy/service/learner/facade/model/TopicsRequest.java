@@ -7,13 +7,14 @@ package org.librairy.service.learner.facade.model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TopicsRequest\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"created by librAIry\"},{\"name\":\"version\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"1.0\"},{\"name\":\"contactEmail\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"parameters\",\"type\":{\"type\":\"map\",\"values\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"avro.java.string\":\"String\"},\"default\":{}},{\"name\":\"from\",\"type\":{\"type\":\"record\",\"name\":\"DataSource\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"enum\",\"name\":\"Format\",\"symbols\":[\"SOLR_CORE\",\"CSV\",\"CSV_TAR_GZ\",\"JSONL\",\"JSONL_TAR_GZ\"]}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"credentials\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Credentials\",\"fields\":[{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apikey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}],\"default\":null},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TopicsRequest\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"created by librAIry\"},{\"name\":\"version\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"1.0\"},{\"name\":\"contactEmail\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"parameters\",\"type\":{\"type\":\"map\",\"values\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"avro.java.string\":\"String\"},\"default\":{}},{\"name\":\"annotate\",\"type\":\"boolean\",\"default\":false},{\"name\":\"from\",\"type\":{\"type\":\"record\",\"name\":\"DataSource\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"enum\",\"name\":\"Format\",\"symbols\":[\"SOLR_CORE\",\"CSV\",\"CSV_TAR_GZ\",\"JSONL\",\"JSONL_TAR_GZ\"]}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"credentials\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Credentials\",\"fields\":[{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apikey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}],\"default\":null},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
    private java.lang.String name;
    private java.lang.String description;
    private java.lang.String version;
    private java.lang.String contactEmail;
    private java.util.Map<java.lang.String,java.lang.String> parameters;
+   private boolean annotate;
    private org.librairy.service.learner.facade.model.DataSource from;
 
   /**
@@ -26,12 +27,13 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
   /**
    * All-args constructor.
    */
-  public TopicsRequest(java.lang.String name, java.lang.String description, java.lang.String version, java.lang.String contactEmail, java.util.Map<java.lang.String,java.lang.String> parameters, org.librairy.service.learner.facade.model.DataSource from) {
+  public TopicsRequest(java.lang.String name, java.lang.String description, java.lang.String version, java.lang.String contactEmail, java.util.Map<java.lang.String,java.lang.String> parameters, java.lang.Boolean annotate, org.librairy.service.learner.facade.model.DataSource from) {
     this.name = name;
     this.description = description;
     this.version = version;
     this.contactEmail = contactEmail;
     this.parameters = parameters;
+    this.annotate = annotate;
     this.from = from;
   }
 
@@ -44,7 +46,8 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
     case 2: return version;
     case 3: return contactEmail;
     case 4: return parameters;
-    case 5: return from;
+    case 5: return annotate;
+    case 6: return from;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -57,7 +60,8 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
     case 2: version = (java.lang.String)value$; break;
     case 3: contactEmail = (java.lang.String)value$; break;
     case 4: parameters = (java.util.Map<java.lang.String,java.lang.String>)value$; break;
-    case 5: from = (org.librairy.service.learner.facade.model.DataSource)value$; break;
+    case 5: annotate = (java.lang.Boolean)value$; break;
+    case 6: from = (org.librairy.service.learner.facade.model.DataSource)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -138,6 +142,21 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
+   * Gets the value of the 'annotate' field.
+   */
+  public java.lang.Boolean getAnnotate() {
+    return annotate;
+  }
+
+  /**
+   * Sets the value of the 'annotate' field.
+   * @param value the value to set.
+   */
+  public void setAnnotate(java.lang.Boolean value) {
+    this.annotate = value;
+  }
+
+  /**
    * Gets the value of the 'from' field.
    */
   public org.librairy.service.learner.facade.model.DataSource getFrom() {
@@ -178,6 +197,7 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
     private java.lang.String version;
     private java.lang.String contactEmail;
     private java.util.Map<java.lang.String,java.lang.String> parameters;
+    private boolean annotate;
     private org.librairy.service.learner.facade.model.DataSource from;
 
     /** Creates a new Builder */
@@ -208,9 +228,13 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
         this.parameters = data().deepCopy(fields()[4].schema(), other.parameters);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.from)) {
-        this.from = data().deepCopy(fields()[5].schema(), other.from);
+      if (isValidValue(fields()[5], other.annotate)) {
+        this.annotate = data().deepCopy(fields()[5].schema(), other.annotate);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.from)) {
+        this.from = data().deepCopy(fields()[6].schema(), other.from);
+        fieldSetFlags()[6] = true;
       }
     }
     
@@ -237,9 +261,13 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
         this.parameters = data().deepCopy(fields()[4].schema(), other.parameters);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.from)) {
-        this.from = data().deepCopy(fields()[5].schema(), other.from);
+      if (isValidValue(fields()[5], other.annotate)) {
+        this.annotate = data().deepCopy(fields()[5].schema(), other.annotate);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.from)) {
+        this.from = data().deepCopy(fields()[6].schema(), other.from);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -368,6 +396,30 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
       return this;
     }
 
+    /** Gets the value of the 'annotate' field */
+    public java.lang.Boolean getAnnotate() {
+      return annotate;
+    }
+    
+    /** Sets the value of the 'annotate' field */
+    public org.librairy.service.learner.facade.model.TopicsRequest.Builder setAnnotate(boolean value) {
+      validate(fields()[5], value);
+      this.annotate = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'annotate' field has been set */
+    public boolean hasAnnotate() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'annotate' field */
+    public org.librairy.service.learner.facade.model.TopicsRequest.Builder clearAnnotate() {
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
     /** Gets the value of the 'from' field */
     public org.librairy.service.learner.facade.model.DataSource getFrom() {
       return from;
@@ -375,21 +427,21 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
     
     /** Sets the value of the 'from' field */
     public org.librairy.service.learner.facade.model.TopicsRequest.Builder setFrom(org.librairy.service.learner.facade.model.DataSource value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.from = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'from' field has been set */
     public boolean hasFrom() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'from' field */
     public org.librairy.service.learner.facade.model.TopicsRequest.Builder clearFrom() {
       from = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -402,7 +454,8 @@ public class TopicsRequest extends org.apache.avro.specific.SpecificRecordBase i
         record.version = fieldSetFlags()[2] ? this.version : (java.lang.String) defaultValue(fields()[2]);
         record.contactEmail = fieldSetFlags()[3] ? this.contactEmail : (java.lang.String) defaultValue(fields()[3]);
         record.parameters = fieldSetFlags()[4] ? this.parameters : (java.util.Map<java.lang.String,java.lang.String>) defaultValue(fields()[4]);
-        record.from = fieldSetFlags()[5] ? this.from : (org.librairy.service.learner.facade.model.DataSource) defaultValue(fields()[5]);
+        record.annotate = fieldSetFlags()[5] ? this.annotate : (java.lang.Boolean) defaultValue(fields()[5]);
+        record.from = fieldSetFlags()[6] ? this.from : (org.librairy.service.learner.facade.model.DataSource) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

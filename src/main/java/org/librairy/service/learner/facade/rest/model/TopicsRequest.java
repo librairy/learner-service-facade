@@ -73,6 +73,12 @@ public class TopicsRequest extends org.librairy.service.learner.facade.model.Top
     }
 
     @Override
+    @ApiModelProperty(value = "annotate documents with topic distribution")
+    public Boolean getAnnotate() {
+        return super.getAnnotate();
+    }
+
+    @Override
     @ApiModelProperty(value = "data source")
     public DataSource getFrom() {
         return new DataSource(super.getFrom());
