@@ -1,6 +1,7 @@
 package org.librairy.service.learner.facade.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
@@ -10,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result extends org.librairy.service.learner.facade.model.Result{
 
     public Result(org.librairy.service.learner.facade.model.Result result){

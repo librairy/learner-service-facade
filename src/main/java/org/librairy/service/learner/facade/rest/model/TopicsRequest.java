@@ -1,9 +1,11 @@
 package org.librairy.service.learner.facade.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.avro.Schema;
 import org.apache.commons.beanutils.BeanUtils;
+import org.librairy.service.ApiModelPropertyExtended;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -11,6 +13,7 @@ import java.util.Map;
 /**
  * @author Badenes Olmedo, Carlos <cbadenes@fi.upm.es>
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TopicsRequest extends org.librairy.service.learner.facade.model.TopicsRequest{
 
     public TopicsRequest(org.librairy.service.learner.facade.model.TopicsRequest topicsRequest){
@@ -23,16 +26,6 @@ public class TopicsRequest extends org.librairy.service.learner.facade.model.Top
         }
     }
 
-    /**
-     * {"name":"name","type":"string"},
-     {"name":"description", "type": "string", "default": "created by librAIry"},
-     {"name":"version", "type": "string", "default": "1.0"},
-     {"name":"contactEmail", "type": "string"},
-     {"name":"parameters","type":{"type" : "map","values":"string"}, "default": {}},
-     {"name":"from","type":"DataSource"}
-     ]}
-     */
-
     public TopicsRequest(){}
 
     @Override
@@ -44,24 +37,28 @@ public class TopicsRequest extends org.librairy.service.learner.facade.model.Top
 
     @Override
     @ApiModelProperty(value = "topic model name")
+    @ApiModelPropertyExtended(defaultValue = "my-model")
     public String getName() {
         return super.getName();
     }
 
     @Override
     @ApiModelProperty(value = "topic model description")
+    @ApiModelPropertyExtended(defaultValue = "my-data")
     public String getDescription() {
         return super.getDescription();
     }
 
     @Override
     @ApiModelProperty(value = "topic model version")
+    @ApiModelPropertyExtended(defaultValue = "1.0")
     public String getVersion() {
         return super.getVersion();
     }
 
     @Override
     @ApiModelProperty(value = "notification email")
+    @ApiModelPropertyExtended(defaultValue = "sample@mail.com")
     public String getContactEmail() {
         return super.getContactEmail();
     }
@@ -74,9 +71,7 @@ public class TopicsRequest extends org.librairy.service.learner.facade.model.Top
 
     @Override
     @ApiModelProperty(value = "annotate documents with topic distribution")
-    public Boolean getAnnotate() {
-        return super.getAnnotate();
-    }
+    public Boolean getAnnotate() {return super.getAnnotate();}
 
     @Override
     @ApiModelProperty(value = "data source")
