@@ -3,6 +3,11 @@
 
 
   "types": [
+    {"name": "Credentials", "type": "record", "fields": [
+      {"name":"user", "type":["null","string"],"default":null},
+      {"name":"password","type":["null","string"],"default":null},
+      {"name":"apikey","type":["null","string"],"default":null}
+    ]},
     {"name": "DataFields", "type": "record", "fields": [
       {"name":"id", "type": "string"},
       {"name":"labels","type":{"type" : "array","items":"string"}, "default": []},
@@ -15,6 +20,7 @@
       {"name":"size", "type": "long", "default": -1},
       {"name":"offset", "type": "long", "default": 0},
       {"name":"cache", "type": "boolean", "default": false},
+      {"name":"credentials", "type":["null","Credentials"], "default": null},
       {"name":"fields", "type": "DataFields"}
     ]},
     {"name": "TopicsRequest", "type": "record", "fields": [

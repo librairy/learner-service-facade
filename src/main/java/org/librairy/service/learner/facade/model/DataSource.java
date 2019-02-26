@@ -7,7 +7,7 @@ package org.librairy.service.learner.facade.model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DataSource extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataSource\",\"namespace\":\"org.librairy.service.learner.facade.model\",\"fields\":[{\"name\":\"url\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"format\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"filter\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"\"},{\"name\":\"size\",\"type\":\"long\",\"default\":-1},{\"name\":\"offset\",\"type\":\"long\",\"default\":0},{\"name\":\"cache\",\"type\":\"boolean\",\"default\":false},{\"name\":\"credentials\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Credentials\",\"fields\":[{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"password\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apikey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}],\"default\":null},{\"name\":\"fields\",\"type\":{\"type\":\"record\",\"name\":\"DataFields\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"labels\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"text\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
    private java.lang.String url;
    private java.lang.String format;
@@ -15,6 +15,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
    private long size;
    private long offset;
    private boolean cache;
+   private org.librairy.service.learner.facade.model.Credentials credentials;
    private org.librairy.service.learner.facade.model.DataFields fields;
 
   /**
@@ -27,13 +28,14 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   /**
    * All-args constructor.
    */
-  public DataSource(java.lang.String url, java.lang.String format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, java.lang.Boolean cache, org.librairy.service.learner.facade.model.DataFields fields) {
+  public DataSource(java.lang.String url, java.lang.String format, java.lang.String filter, java.lang.Long size, java.lang.Long offset, java.lang.Boolean cache, org.librairy.service.learner.facade.model.Credentials credentials, org.librairy.service.learner.facade.model.DataFields fields) {
     this.url = url;
     this.format = format;
     this.filter = filter;
     this.size = size;
     this.offset = offset;
     this.cache = cache;
+    this.credentials = credentials;
     this.fields = fields;
   }
 
@@ -47,7 +49,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     case 3: return size;
     case 4: return offset;
     case 5: return cache;
-    case 6: return fields;
+    case 6: return credentials;
+    case 7: return fields;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -61,7 +64,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     case 3: size = (java.lang.Long)value$; break;
     case 4: offset = (java.lang.Long)value$; break;
     case 5: cache = (java.lang.Boolean)value$; break;
-    case 6: fields = (org.librairy.service.learner.facade.model.DataFields)value$; break;
+    case 6: credentials = (org.librairy.service.learner.facade.model.Credentials)value$; break;
+    case 7: fields = (org.librairy.service.learner.facade.model.DataFields)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -157,6 +161,21 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   /**
+   * Gets the value of the 'credentials' field.
+   */
+  public org.librairy.service.learner.facade.model.Credentials getCredentials() {
+    return credentials;
+  }
+
+  /**
+   * Sets the value of the 'credentials' field.
+   * @param value the value to set.
+   */
+  public void setCredentials(org.librairy.service.learner.facade.model.Credentials value) {
+    this.credentials = value;
+  }
+
+  /**
    * Gets the value of the 'fields' field.
    */
   public org.librairy.service.learner.facade.model.DataFields getFields() {
@@ -198,6 +217,7 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     private long size;
     private long offset;
     private boolean cache;
+    private org.librairy.service.learner.facade.model.Credentials credentials;
     private org.librairy.service.learner.facade.model.DataFields fields;
 
     /** Creates a new Builder */
@@ -232,9 +252,13 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         this.cache = data().deepCopy(fields()[5].schema(), other.cache);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.fields)) {
-        this.fields = data().deepCopy(fields()[6].schema(), other.fields);
+      if (isValidValue(fields()[6], other.credentials)) {
+        this.credentials = data().deepCopy(fields()[6].schema(), other.credentials);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.fields)) {
+        this.fields = data().deepCopy(fields()[7].schema(), other.fields);
+        fieldSetFlags()[7] = true;
       }
     }
     
@@ -265,9 +289,13 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         this.cache = data().deepCopy(fields()[5].schema(), other.cache);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.fields)) {
-        this.fields = data().deepCopy(fields()[6].schema(), other.fields);
+      if (isValidValue(fields()[6], other.credentials)) {
+        this.credentials = data().deepCopy(fields()[6].schema(), other.credentials);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.fields)) {
+        this.fields = data().deepCopy(fields()[7].schema(), other.fields);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -418,6 +446,31 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
       return this;
     }
 
+    /** Gets the value of the 'credentials' field */
+    public org.librairy.service.learner.facade.model.Credentials getCredentials() {
+      return credentials;
+    }
+    
+    /** Sets the value of the 'credentials' field */
+    public org.librairy.service.learner.facade.model.DataSource.Builder setCredentials(org.librairy.service.learner.facade.model.Credentials value) {
+      validate(fields()[6], value);
+      this.credentials = value;
+      fieldSetFlags()[6] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'credentials' field has been set */
+    public boolean hasCredentials() {
+      return fieldSetFlags()[6];
+    }
+    
+    /** Clears the value of the 'credentials' field */
+    public org.librairy.service.learner.facade.model.DataSource.Builder clearCredentials() {
+      credentials = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
     /** Gets the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataFields getFields() {
       return fields;
@@ -425,21 +478,21 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
     
     /** Sets the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataSource.Builder setFields(org.librairy.service.learner.facade.model.DataFields value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.fields = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this; 
     }
     
     /** Checks whether the 'fields' field has been set */
     public boolean hasFields() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
     
     /** Clears the value of the 'fields' field */
     public org.librairy.service.learner.facade.model.DataSource.Builder clearFields() {
       fields = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -453,7 +506,8 @@ public class DataSource extends org.apache.avro.specific.SpecificRecordBase impl
         record.size = fieldSetFlags()[3] ? this.size : (java.lang.Long) defaultValue(fields()[3]);
         record.offset = fieldSetFlags()[4] ? this.offset : (java.lang.Long) defaultValue(fields()[4]);
         record.cache = fieldSetFlags()[5] ? this.cache : (java.lang.Boolean) defaultValue(fields()[5]);
-        record.fields = fieldSetFlags()[6] ? this.fields : (org.librairy.service.learner.facade.model.DataFields) defaultValue(fields()[6]);
+        record.credentials = fieldSetFlags()[6] ? this.credentials : (org.librairy.service.learner.facade.model.Credentials) defaultValue(fields()[6]);
+        record.fields = fieldSetFlags()[7] ? this.fields : (org.librairy.service.learner.facade.model.DataFields) defaultValue(fields()[7]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

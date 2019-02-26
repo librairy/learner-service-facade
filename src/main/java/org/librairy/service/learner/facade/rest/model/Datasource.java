@@ -75,4 +75,10 @@ public class DataSource extends org.librairy.service.learner.facade.model.DataSo
         return new DataFields(super.getFields());
     }
 
+    @Override
+    @ApiModelProperty(value = "data credentials")
+    public Credentials getCredentials() {
+        return new Credentials(super.getCredentials());
+    }
+
 }
